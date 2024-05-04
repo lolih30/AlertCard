@@ -9,7 +9,7 @@ use function Laravel\Prompts\text;
 
 class CustomAlert extends HtmlCard
 {
-    public function buildCard($name, $title, $subtitle, $image, $size, $link)
+    public function buildCards($name, $title, $subtitle, $image, $size, $link)
     {
         $this->width($size)
             ->view('alertCard.alert', [

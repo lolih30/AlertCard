@@ -58,11 +58,9 @@ class Alert extends Resource
                 'full' => 'full',
             ]),
             Text::make('Link'),
-            DateTime::make('Publish at')->hideFromIndex()->rules('after_or_equal:today'),
-            DateTime::make('Publish until')->hideFromIndex()->rules('after_or_equal:publish_at'),
-            Boolean::make('Is Published')->canSee(function ($request) {
-                return true;
-            }),
+            DateTime::make('Publish at')->rules('after_or_equal:today'),
+            DateTime::make('Publish until')->rules('after_or_equal:publish_at'),
+            Boolean::make('Is Published')
         ];
     }
 

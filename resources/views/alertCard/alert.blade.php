@@ -13,11 +13,12 @@
 
         <div class=" flex flex-row items-center pl-6">
             <div style="max-width:100px; max-height:100px; min-width:50px; min-height:50px; overflow:hidden">
-                <img src="{{ url('storage/' . $image) }}" alt="" >
+                <img src="{{ url('storage/' . $image) }}" alt="">
             </div>
-            <div style="margin-left: 1rem;" >
+            <div style="margin-left: 1rem;">
 
-                <a href={{$link}} class=" text-3xl  min-text-2xl font-light text-[#6B7A8E]" style="margin-bottom: 5px">{{ $title }}</a>
+                <a href={{ $link }} class=" text-3xl  min-text-2xl font-light text-[#6B7A8E]"
+                    style="margin-bottom: 5px">{{ $title }}</a>
                 <p class="text-[#787B80]">{{ $subtitle }}</p>
             </div>
         </div>
