@@ -2,7 +2,8 @@
 
 namespace App\Nova;
 
-use App\Nova\Cards\CustomAlert;
+require_once app_path('classes/buildCard.php');
+
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Image;
@@ -73,7 +74,7 @@ class Alert extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return $this->loadAlert();
+        return loadAlert();
     }
 
     /**
@@ -107,18 +108,5 @@ class Alert extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
-    }
-
-
-    public function loadAlert()
-    {
-        $alerts = Alert::where('is_published', true)->get();
-        $cards = [];
-        foreach ($alerts as $alert) {
-            $cardAlert = new CustomAlert;
-            $cardAlert->buildCard($alert->name, $alert->title, $alert->subtitle, $alert->image, $alert->size, $alert->link);
-            array_push($cards, $cardAlert);
-        }
-        return $cards;
     }
 }
