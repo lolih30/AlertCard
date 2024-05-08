@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "build-form-steps-tool": "cd nova-components/FormStepsTool && npm run dev",
+        "build-form-steps-tool-prod": "cd nova-components/FormStepsTool && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.6.4",
