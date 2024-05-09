@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "009b331e6cedc0da934e6832a880c080",
+    "content-hash": "9c73d7bedfc47eb604d392b0f27a5a40",
     "packages": [
         {
             "name": "brick/math",
@@ -6306,6 +6306,42 @@
             "time": "2023-12-08T13:03:43+00:00"
         },
         {
+            "name": "tools/form-steps",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/FormSteps",
+                "reference": "26ed6d0558022ef20f0cd2d1ca718fc9364264ea"
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tools\\FormSteps\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tools\\FormSteps\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova tool.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "tools/form-steps-tool",
             "version": "dev-main",
             "dist": {
@@ -9008,7 +9044,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "tools/form-steps-tool": 20
+        "tools/form-steps-tool": 20,
+        "tools/form-steps": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

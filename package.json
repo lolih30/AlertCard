@@ -5,7 +5,9 @@
         "dev": "vite",
         "build": "vite build",
         "build-form-steps-tool": "cd nova-components/FormStepsTool && npm run dev",
-        "build-form-steps-tool-prod": "cd nova-components/FormStepsTool && npm run prod"
+        "build-form-steps-tool-prod": "cd nova-components/FormStepsTool && npm run prod",
+        "build-form-steps": "cd nova-components/FormSteps && npm run dev",
+        "build-form-steps-prod": "cd nova-components/FormSteps && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.6.4",

@@ -1,43 +1,46 @@
 <template>
-  <div>
-    <!-- Mostrar el iframe -->
-    <iframe :src="formsteps.url" width="100%" height="400px" @load="handleIframeLoad"></iframe>
+    <div>     
+        <div v-if="currentStep">
+            <h3>{{ currentStep.title }}</h3>
+            <p>{{ currentStep.description }}</p>
+            <br>
+        </div>
 
-    <!-- Mostrar las indicaciones -->
-    <div v-if="formsteps">
-      <h3>{{ formsteps.titulo }}</h3>
-      <p>{{ formsteps.descripcion }}</p>
-      <a :href="formsteps.url" target="_blank">Ir a la URL</a>
+        <iframe src="http://127.0.0.1:8000/forms/test1.html" width="100%" height="400px" @load="handleIframeLoad"></iframe>
     </div>
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      currentStepIndex: 0, // Índice del paso actual
-      steps: [], // Array de pasos cargados desde el archivo de configuración
-    };
-  },
-  mounted() {
-    // Cargar los pasos desde el archivo de configuración
-    this.steps = require('@/config/Formsteps.php');
-  },
-  computed: {
-    currentStep() {
-      return this.steps[this.currentStepIndex];
+  </template>
+  
+  <script>
+  export default {
+    data() {
+        return {
+            iframeUrl: '',
+            currentStep: null,
+            steps: null
+        };
     },
-  },
-  methods: {
-    handleIframeLoad() {
-      // Escuchar el evento de carga del iframe para obtener la nueva URL
-      const iframe = this.$el.querySelector('iframe');
-      const newUrl = iframe.contentWindow.location.href;
+  
+    methods: {
+        handleIframeLoad() {
+            const iframe = this.$el.querySelector('iframe');
+            this.iframeUrl = iframe.contentWindow.location.href;
+            console.log("Navegando..", this.iframeUrl)
+            console.log('steps', this.steps)
+           
+  
+            // Buscar el paso correspondiente
+            for (const stepId in this.steps) {
+                if (this.steps[stepId].url === this.iframeUrl) {
+                    console.log(this.steps[stepId])
+                    this.currentStep = this.steps[stepId];
+                    break;
+                }
+            }
 
-      // Encontrar el índice del paso que coincide con la nueva URL
-      this.currentStepIndex = this.steps.findIndex(step => step.url === newUrl);
+        }
     },
-  },
-};
-</script>
+    mounted() {
+        this.steps = Nova.config('steps');
+    }
+  }
+  </script>

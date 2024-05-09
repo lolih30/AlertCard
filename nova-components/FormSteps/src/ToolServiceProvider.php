@@ -1,13 +1,13 @@
 <?php
 
-namespace Tools\FormStepsTool;
+namespace Tools\FormSteps;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Http\Middleware\Authenticate;
 use Laravel\Nova\Nova;
-use Tools\FormStepsTool\Http\Middleware\Authorize;
+use Tools\FormSteps\Http\Middleware\Authorize;
 
 class ToolServiceProvider extends ServiceProvider
 {
@@ -23,9 +23,7 @@ class ToolServiceProvider extends ServiceProvider
         });
 
         Nova::serving(function (ServingNova $event) {
-            Nova::provideToScript([
-                'steps' => config('formsteps')
-            ]);
+            //
         });
     }
 
@@ -40,11 +38,11 @@ class ToolServiceProvider extends ServiceProvider
             return;
         }
 
-        Nova::router(['nova', Authenticate::class, Authorize::class], 'form-steps-tool')
+        Nova::router(['nova', Authenticate::class, Authorize::class], 'form-steps')
             ->group(__DIR__.'/../routes/inertia.php');
 
         Route::middleware(['nova', Authorize::class])
-            ->prefix('nova-vendor/form-steps-tool')
+            ->prefix('nova-vendor/form-steps')
             ->group(__DIR__.'/../routes/api.php');
     }
 

@@ -15,31 +15,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      currentStepIndex: 0,
-      // Índice del paso actual
-      steps: [] // Array de pasos cargados desde el archivo de configuración
+      iframeUrl: '',
+      currentStep: null,
+      steps: null
     };
-  },
-  mounted: function mounted() {
-    // Cargar los pasos desde el archivo de configuración
-    this.steps = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@/config/Formsteps.php'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-  },
-  computed: {
-    currentStep: function currentStep() {
-      return this.steps[this.currentStepIndex];
-    }
   },
   methods: {
     handleIframeLoad: function handleIframeLoad() {
-      // Escuchar el evento de carga del iframe para obtener la nueva URL
       var iframe = this.$el.querySelector('iframe');
-      var newUrl = iframe.contentWindow.location.href;
+      this.iframeUrl = iframe.contentWindow.location.href;
+      console.log("Navegando..", this.iframeUrl);
+      console.log('steps', this.steps);
 
-      // Encontrar el índice del paso que coincide con la nueva URL
-      this.currentStepIndex = this.steps.findIndex(function (step) {
-        return step.url === newUrl;
-      });
+      // Buscar el paso correspondiente
+      for (var stepId in this.steps) {
+        if (this.steps[stepId].url === this.iframeUrl) {
+          console.log(this.steps[stepId]);
+          this.currentStep = this.steps[stepId];
+          break;
+        }
+      }
     }
+  },
+  mounted: function mounted() {
+    this.steps = Nova.config('steps');
   }
 });
 
@@ -58,23 +57,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-var _hoisted_1 = ["src"];
-var _hoisted_2 = {
+var _hoisted_1 = {
   key: 0
 };
-var _hoisted_3 = ["href"];
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mostrar el iframe "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("iframe", {
-    src: _ctx.formsteps.url,
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [$data.currentStep ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentStep.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentStep.description), 1 /* TEXT */), _hoisted_2])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("iframe", {
+    src: "http://127.0.0.1:8000/forms/test1.html",
     width: "100%",
     height: "400px",
     onLoad: _cache[0] || (_cache[0] = function () {
       return $options.handleIframeLoad && $options.handleIframeLoad.apply($options, arguments);
     })
-  }, null, 40 /* PROPS, NEED_HYDRATION */, _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mostrar las indicaciones "), _ctx.formsteps ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formsteps.titulo), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formsteps.descripcion), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: _ctx.formsteps.url,
-    target: "_blank"
-  }, "Ir a la URL", 8 /* PROPS */, _hoisted_3)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }, null, 32 /* NEED_HYDRATION */)]);
 }
 
 /***/ }),
