@@ -13,8 +13,7 @@
         "laravel/framework": "^11.0",
         "laravel/nova": "^4.0",
         "laravel/tinker": "^2.9",
-        "tools/form-steps-tool": "@dev",
-        "tools/form-steps": "@dev"
+        "tools/form-steps-tool": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -78,10 +77,6 @@
         {
             "type": "path",
             "url": "./nova-components/FormStepsTool"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/FormSteps"
         }
     ]
 }
